@@ -345,21 +345,20 @@ Redis是......
 
 <div class="post-preview">
 
-    <a href="/article/docker/docker-architecture/">
+    <a href="/article/docker/docker-commands-principle/">
         <h2 class="post-title">
-            [Docker] Docker整体架构图
+            [Docker] Docker常用命令原理图
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            一、Docker的总架构图
+            1. 基本概念
+1.1. image layer（镜像层）
+镜像可以看成是由多个镜像层叠加起来的一个文件系统，镜像层也可以简单理解为一个基本的镜像，而每个镜像层之间通过指针的形式进行叠加。
 
-docker是一个C/S模式的架构，后端是一个松耦合架构，模块各司其职。
-
-用户是使用Docker Client与Docker Daemon建立通信，并发送请求给后者。
-Docker Daemon作为Docker架构中的主体部分，首先提供Server的功能使其可以接受Docker Client的请求；
-Engine执行Docker内部的一系列工作，每一项工作都是......
+根据上图，镜像层的主要组成部分包括镜像层id，镜像层指针【指向父层】，元数据【layer metadata】包含了docker构建和运行的信息还有父层的层次信息。
+只读层和读写层【top layer】的......
         </div>
     </a>
     
@@ -379,20 +378,21 @@ Engine执行Docker内部的一系列工作，每一项工作都是......
 
 <div class="post-preview">
 
-    <a href="/article/docker/docker-commands-principle/">
+    <a href="/article/docker/docker-architecture/">
         <h2 class="post-title">
-            [Docker] Docker常用命令原理图
+            [Docker] Docker整体架构图
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            1. 基本概念
-1.1. image layer（镜像层）
-镜像可以看成是由多个镜像层叠加起来的一个文件系统，镜像层也可以简单理解为一个基本的镜像，而每个镜像层之间通过指针的形式进行叠加。
+            一、Docker的总架构图
 
-根据上图，镜像层的主要组成部分包括镜像层id，镜像层指针【指向父层】，元数据【layer metadata】包含了docker构建和运行的信息还有父层的层次信息。
-只读层和读写层【top layer】的......
+docker是一个C/S模式的架构，后端是一个松耦合架构，模块各司其职。
+
+用户是使用Docker Client与Docker Daemon建立通信，并发送请求给后者。
+Docker Daemon作为Docker架构中的主体部分，首先提供Server的功能使其可以接受Docker Client的请求；
+Engine执行Docker内部的一系列工作，每一项工作都是......
         </div>
     </a>
     
@@ -497,9 +497,9 @@ dockerfile指令分为构建指令和设置指令。
             
         
             
-        
-            
             <a href="/tags/#Ubuntu" title="Ubuntu" rel="4">Ubuntu</a>
+            
+        
             
         
             
@@ -513,11 +513,11 @@ dockerfile指令分为构建指令和设置指令。
             
         
             
-            <a href="/tags/#vscode" title="vscode" rel="2">vscode</a>
+            <a href="/tags/#Redis" title="Redis" rel="3">Redis</a>
             
         
             
-            <a href="/tags/#Redis" title="Redis" rel="3">Redis</a>
+            <a href="/tags/#vscode" title="vscode" rel="2">vscode</a>
             
         
             
@@ -613,11 +613,11 @@ dockerfile指令分为构建指令和设置指令。
         </li>
       
         <li>
-          <a href="/article/Express/Express简介/">[Node] Express简介 </a>
+          <a href="/article/Express/Express静态服务/">[Node] Express静态服务 </a>
         </li>
       
         <li>
-          <a href="/article/Express/Express静态服务/">[Node] Express静态服务 </a>
+          <a href="/article/Express/Express简介/">[Node] Express简介 </a>
         </li>
       
     </ul>
