@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="2xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content>
+    <meta name="keyword" content="博客，技术，java">
+    <meta name="baidu-site-verification" content="2LpjigRhJ6">
+    <link rel="shortcut icon" href="/img/ironman-draw.ico">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          zz胖的博客 | Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://zzpblog.cn/archives/2/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/header_img/tag.png') 
+            /*config*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="site-heading">
+                        <h1>zz胖的博客-技术永无止境</h1>
+                        <!--<hr class="small">-->
+                        <span class="subheading">一个终身奉献给计算机的男人</span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">zz胖的博客-技术永无止境</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">主页</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">关于我</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">文章</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">标签</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Main Content -->
+<div class="container">
+    <div class="row">
+        
+
+<!-- USE SIDEBAR -->
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                post-container
+            ">
+            
+                <!-- Main Content -->
+
+
+<div class="post-preview">
+
+    <a href="/article/node/nodejs-require/">
+        <h2 class="post-title">
+            [Node] nodejs-require
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            nodejs-require
+
+简单来说require就是加载
+语法
+
+ 1234var 自定义变量名称 = require('模块')//模块:核心模块//第三方模块//自定义模块
+
+执行被加载模块中的代码
+当然它会优先在缓存加载(多个文件重复引用require模块的时候)
+得到加载模块中的exports导出的接口对象
+require可以省略后缀名.js
+require相对路径中./ 不能......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by zz胖的博客 on
+            2019-05-23
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Node" title="Node">Node</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/node/nodejs-http(2)/">
+        <h2 class="post-title">
+            [Node] 关于nodejs中的http请求(2)
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            关于nodejs中的http请求(2)
+
+在服务端默认发送的数据,其实是utf8编码的内容,但是浏览器并不知道你是utf8的内容,浏览器在不知道服务器响应内容的编码情况下,它会默认当前操作系统编码去解析,中文操作系统默认是gbk
+解决方法就是正确的告诉浏览器给你发送的内容是什么编码,那怎么告诉浏览器呢,看下面代码吧…
+
+123456789101112131415161718var http ......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by zz胖的博客 on
+            2019-05-23
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Node" title="Node">Node</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/node/nodejs-http(1)/">
+        <h2 class="post-title">
+            [Node] 关于nodejs中的http请求(1)
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            关于nodejs中的http请求(1)
+
+
+request
+
+request应该都有了解,他其实就是请求对象,通过这个请求对象,可以获取客户端请求过来的一些信息,比如请求路径
+request有很多属性
+url,返回请求路径后缀比如 http://localhost:3000/test,这里返回的就是/test
+
+
+
+response
+
+response当然是响应对象了,通过这个响应对象可以返......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by zz胖的博客 on
+            2019-05-22
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Node" title="Node">Node</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/node/服务端渲染与客户端渲染/">
+        <h2 class="post-title">
+            [Node] 服务端渲染与客户端渲染
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            服务端渲染与客户端渲染
+
+服务端渲染
+
+
+说白了,就是在服务端使用模板引擎
+末班引擎最早诞生于服务端,后来才到了前端
+
+
+
+服务端和客户端渲染的区别是什么
+
+客户端渲染
+
+
+浏览器发请求,拿数据,模板引擎渲染,得到页面响应给浏览器页面中的字符串
+浏览器收到服务端响应的页面字符串,从上到下一次解析html,解析过程中,如果发现有script标签就会执行脚本,如果发现ajax请求,则再次发起新的......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by zz胖的博客 on
+            2019-05-21
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Node" title="Node">Node</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/node/nodejs-helloWord/">
+        <h2 class="post-title">
+            [Node] nodejs-helloWord
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            nodejs-helloWord
+现在就是正式开始学习nodejs,好像什么语言学习都要从helloword学起,那node也从这里开始学吧
+
+
+nodejs写helloword很简单很简单
+
+
+
+建一个js文件咯,当然这个名字有讲头了,咱们用nodejs当然文件名不能叫node.js了,哈哈是不是很傻,当然最好文件名也不要使用中文定义会出意想不到的问题啦,其他的名字随便起,小写字母文件名开......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by zz胖的博客 on
+            2019-05-21
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Node" title="Node">Node</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/node/nodejs安装/">
+        <h2 class="post-title">
+            [Node] nodejs安装
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            nodejs安装
+
+
+Windows
+
+windows安装很简单啦,去官网下载,(LTS版本是长期支持版本,稳定版)就可以啦(Currect版本体验版,最新特性版),然后写一部下一步咯https://nodejs.org/en/
+一般安装完成以后,他会自动将node和npm都安装进去,以及环境变量
+安装完成node --version 输出一下版本号咯
+
+
+
+linux
+
+官网也有啦,进去下......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by zz胖的博客 on
+            2019-05-21
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Node" title="Node">Node</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/node/webstom开发nodejs/">
+        <h2 class="post-title">
+            [Node] 使用webstom开发nodejs
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            使用webstom开发nodejs
+
+nodejs自动提示 https://www.cnblogs.com/tgxh/p/6293084.html
+
+...
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by zz胖的博客 on
+            2019-05-21
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Node" title="Node">Node</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/node/nodejs到底干嘛/">
+        <h2 class="post-title">
+            [Node] nodejs到底干嘛
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            nodejs到底干嘛
+
+Web服务器做后台,java/php能做的,他都能做
+命令行工具
+对于前端开发工程师来说,主要是使用第三方的工具
+
+WebPack
+gulp
+npm
+
+
+需要预备的知识
+
+HTML
+CSS
+JavaScript
+
+阮一峰的教程哦 http://javascript.ruanyifeng.com/
+
+
+简单的命令行操作
+
+
+
+...
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by zz胖的博客 on
+            2019-05-21
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Node" title="Node">Node</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/node/nodejs到底是什么/">
+        <h2 class="post-title">
+            [Node] nodejs到底是什么
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            nodejs到底是什么
+
+
+当然首先就是nodejs的官网 https://nodejs.org/en/
+
+
+Node.js® is a JavaScript runtime built on Chrome’s V8 JavaScript engine.
+
+nodejs不是一门语言
+nodejs不是库,不是框架
+nodejs是一个JavaScript运行时环境
+简单来说就是nodejs可以解......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by zz胖的博客 on
+            2019-05-21
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Node" title="Node">Node</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/node/为什么使用nodejs/">
+        <h2 class="post-title">
+            [Node] 为什么要使用nodejs
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            为什么要使用nodejs
+
+自己的理解
+
+
+
+其实根本原因是为了全栈工程师这个名号,什么是全栈工程师呢?很简单就是 front-end+back-end 就是前端加后端,当然如果加上移动端那更厉害咯
+
+
+前端有什么呢,其实很简单,就是html+css+JavaScript,简单吧,当然js也有很多框架,什么vue,react,等等,css也提供很多框架咯,比如sass/less等等,html......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by zz胖的博客 on
+            2019-05-21
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Node" title="Node">Node</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+
+
+<!-- Pager -->
+
+<ul class="pager">
+    
+        <li class="previous">
+            <a href="/">&larr; 上一页</a>
+        </li>
+    
+    
+        <li class="next">
+            <a href="/archives/3/">下一页 &rarr;</a>
+        </li>
+    
+</ul>
+
+
+
+                <br>
+
+                <!-- require APlayer -->
+                
+
+                <!-- 如果开启评论功能 -->
+                
+            </div>
+
+          <!-- Sidebar Container -->
+<div class="
+    col-lg-3 col-lg-offset-0
+    col-md-3 col-md-offset-0
+    col-sm-12
+    col-xs-12
+    sidebar-container
+">
+    
+        <!-- Featured Tags -->
+
+<section>
+    <!-- no hr -->
+    <h5><a href="/tags/">特色标签</a></h5>
+    <div class="tags">
+        
+            
+            <a href="/tags/#Node" title="Node" rel="20">Node</a>
+            
+        
+            
+            <a href="/tags/#Idea" title="Idea" rel="2">Idea</a>
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Ubuntu" title="Ubuntu" rel="4">Ubuntu</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Docker" title="Docker" rel="20">Docker</a>
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#vscode" title="vscode" rel="2">vscode</a>
+            
+        
+            
+            <a href="/tags/#Redis" title="Redis" rel="3">Redis</a>
+            
+        
+            
+        
+    </div>
+</section>
+
+        <hr>
+    
+        <!-- Short About -->
+<section class="visible-md visible-lg">
+    <h5><a href="/about/">关于我</a></h5>
+    <div class="short-about">
+
+        
+            <img id = "avatar_pic" src="/img/zzp/avatar.png" />
+        
+
+        
+            <p> 一个终身奉献给计算机的男人</p>
+        
+
+        <!-- SNS Link -->
+        <ul class="list-inline">
+            
+            
+                <li>
+                    <a target="_blank" href="https://twitter.com/superzzp">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            
+            
+
+            
+
+            
+                <li>
+                    <a target="_blank" href="https://www.facebook.com/superzzp">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            
+
+            
+                <li>
+                    <a target="_blank"  href="https://github.com/superzzp">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            
+            
+            
+            
+                <li>
+                    <a target="_blank"  href="https://www.linkedin.com/in/superzzp">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+</section>
+        <hr>
+    
+        
+  <h5>RECENT POSTS</h3>
+  <div class="widget">
+    <ul>
+      
+        <li>
+          <a href="/article/node/nodejs-mongoose/">[Node] nodejs-mongoose</a>
+        </li>
+      
+        <li>
+          <a href="/article/Express/Express-HelloWord/">[Node] Express-HelloWord </a>
+        </li>
+      
+        <li>
+          <a href="/article/Express/Express-路由/">[Node] Express-路由 </a>
+        </li>
+      
+        <li>
+          <a href="/article/Express/Express简介/">[Node] Express简介 </a>
+        </li>
+      
+        <li>
+          <a href="/article/Express/Express静态服务/">[Node] Express静态服务 </a>
+        </li>
+      
+    </ul>
+  </div>
+
+        <hr>
+    
+        <!-- Friends Blog -->
+
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+
+    
+</ul>
+
+        <hr>
+    
+        
+    <h5>ARCHIVES</h5>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+
+        <hr>
+    
+</div>
+
+        
+    </div>
+</div>
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/superzzp">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/superzzp">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/superzzp">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/superzzp">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; zz胖的博客 2020 
+                    <br>
+                    Theme by <a href="http://zzpblog.cn">zzp</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://www.zzpblog.cn">zz胖</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://github.com/zzpsuper/zzpsuper.github.io" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://zzpblog.cn/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '938dd925deefb971d57c9b42ae09c5da';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://zzpblog.cn/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

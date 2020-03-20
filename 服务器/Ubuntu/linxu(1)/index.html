@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="2xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content>
+    <meta name="keyword" content="博客，技术，java">
+    <meta name="baidu-site-verification" content="2LpjigRhJ6">
+    <link rel="shortcut icon" href="/img/ironman-draw.ico">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Linux命令集合 - zz胖的博客 | Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://zzpblog.cn/服务器/Ubuntu/linxu(1)/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('http://ozilwgpje.bkt.clouddn.com/blog/article.jpg?imageslim')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#linux" title="linux">linux</a>
+                            
+                        </div>
+                        <h1>Linux命令集合</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by zz胖的博客 on
+                            2018-09-25
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">zz胖的博客-技术永无止境</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">主页</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">关于我</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">文章</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">标签</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2><span id="linux命令集合">Linux命令集合</span></h2>
+<h2><span id="一-linux基础命令">一、Linux基础命令</span></h2>
+<h3><span id="1-ls指令">1、ls指令</span></h3>
+<h3><span id="2-pwd命令">2、pwd命令</span></h3>
+<h3><span id="3-cd命令">3、cd命令</span></h3>
+<h3><span id="4-mkdir命令">4、mkdir命令</span></h3>
+<h3><span id="5-touch命令">5、touch命令</span></h3>
+<h3><span id="6-cp命令">6、cp命令</span></h3>
+<h3><span id="7-mv命令">7、mv命令</span></h3>
+<h3><span id="8-rm命令">8、rm命令</span></h3>
+<h3><span id="9-vim命令">9、vim命令</span></h3>
+<h3><span id="10-输出重定向">10、输出重定向</span></h3>
+<h3><span id="11-cat命令">11、cat命令</span></h3>
+<h2><span id="二-linux进阶指令">二、Linux进阶指令</span></h2>
+<h2><span id="1-df指令">1、df指令</span></h2>
+<h3><span id="2-free指令">2、free指令</span></h3>
+<h3><span id="3-head指令">3、head指令</span></h3>
+<h3><span id="4-tail指令">4、tail指令</span></h3>
+<h3><span id="5-less指令">5、less指令</span></h3>
+<p>作用：查看文件，以做少的内容输出，按下辅助功能键</p>
+<h3><span id="6-wc指令">6、wc指令</span></h3>
+<p>作用：统计文件内容信息（包含行数、单词数、字节数）</p>
+<p>语法：#wc -lwc 文件路径</p>
+<p>-l:行数</p>
+<p>-w:单词数</p>
+<p>-c:字节数</p>
+<h3><span id="7-date">7、date</span></h3>
+<p>作用：操作时间和日期（读取、设置）</p>
+<p>小解释：CST：指的是当地时间</p>
+<p>用法1：#date +%F或者#date +&quot;%Y-%m-%d&quot;</p>
+<p>用法2  #date “+%F %T&quot;或者#date +”%Y-%m-%d %H:%M:%S&quot;</p>
+<h3><span id="8-cal">8、cal</span></h3>
+<p>作用：日历</p>
+<p>语法：#cal 等价于#cal -1当前月日历</p>
+<p>语法：#cal -3 三天的</p>
+<p>语法：# cal -y  2018输出某一年的</p>
+<h3><span id="9-clearctrll指令">9、clear/ctrl+L指令</span></h3>
+<p>作用：清楚信息</p>
+<h3><span id="10-管道">10、管道</span></h3>
+<p>作用：一般用于过滤</p>
+<p>语法：#ls /| grep y 需要通过管道查询出根目录下包含“y”字母的文档名称</p>
+<p>grep主要用于过滤</p>
+<p>扩展处理：#ls /| wc -l</p>
+<h2><span id="三-linux高级指令">三、Linux高级指令</span></h2>
+<h3><span id="1-hostname指令">1、hostname指令</span></h3>
+<p>作用：操作服务器的主机名</p>
+<p>用法1：hostname 输出完整主机名</p>
+<p>用法2：hostname -f 输出当前主机名中的fqdn（权限定域名）</p>
+<h3><span id="2-id指令">2、id指令</span></h3>
+<p>作用：查看一个用户的一些基本信息，不指定则默认当前用户</p>
+<p>###　3、whoami指令</p>
+<p>作用：显示当前的登录名</p>
+<h3><span id="4-ps-ef指令">4、ps -ef指令</span></h3>
+<p>作用：用于查看当前服务器的进程</p>
+<p>-e：表示全部进程</p>
+<p>-f：表示全部列</p>
+<p>案例：#ps -ef |grep 进程名称</p>
+<h3><span id="5-top指令">5、top指令</span></h3>
+<p>作用：查看服务器进程占用的资源</p>
+<p>语法：#top 动态资源</p>
+<p>退出：q</p>
+<p>解释：PR：优先级</p>
+<p>VIRT：虚拟内存</p>
+<p>RES：常驻内存</p>
+<p>SHR：共享内存</p>
+<p>​	计算一个进程实际使用的内存 = 常驻内存（RES）</p>
+<p>注意：在运行top的时候可以按下快捷键排序，从高到底降序</p>
+<p>M：表示内存排序</p>
+<p>P：按照CPU使用率排序</p>
+<p>1：当服务器有多个CPU时可以使用‘1’ 切换是否展示每个cpu的详细信息</p>
+<h3><span id="6-du-sh指令">6、du -sh指令</span></h3>
+<p>作用：查看目录的真实大小</p>
+<p>-s:只显示汇总的大小</p>
+<p>-h：表示以高可读形式显示</p>
+<p>案例：#du -sh 后面是路径例如/etc/</p>
+<h2><span id="四-常用的命令">四、常用的命令</span></h2>
+<h3><span id="1-查看系统版本">1、查看系统版本</span></h3>
+<p>lsb_release -a</p>
+<h3><span id="2-压缩文件">2、压缩文件</span></h3>
+<h3><span id="tar压缩命令">tar压缩命令</span></h3>
+<table>
+<thead>
+<tr>
+<th>tar</th>
+<th>tar [-cxzjvf] 压缩打包文档的名称 欲打包目录</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td>-c</td>
+<td>建立一个归档文件的参数指令压缩</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>-x</td>
+<td>解开一个归档文件的参数指令解压</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>-z</td>
+<td>是否需要用 gzip 压缩</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>-j</td>
+<td>是否需要用 bzip2 压缩</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>-v</td>
+<td>压缩的过程中显示文件</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>-f</td>
+<td>使用档名，在 f 之后要立即接档名</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>-tf</td>
+<td>查看归档文件里面的文件</td>
+</tr>
+</tbody>
+</table>
+<p><strong>例子：</strong></p>
+<ul>
+<li>压缩文件夹：<code>tar -zcvf test.tar.gz test\</code></li>
+<li>解压文件夹：<code>tar -zxvf test.tar.gz</code></li>
+</ul>
+<h3><span id="gzip">gzip</span></h3>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>语法</th>
+<th>参数</th>
+<th>参数说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>gzip</td>
+<td>gzip [选项] 压缩（解压缩）的文件名</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>-d</td>
+<td>解压缩</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>-l</td>
+<td>对每个压缩文件，显示压缩文件的大小，未压缩文件的大小，压缩比，未压缩文件的名字</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>-v</td>
+<td>对每一个压缩和解压的文件，显示文件名和压缩比</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>-num</td>
+<td>用指定的数字num调整压缩的速度，-1或–fast表示最快压缩方法（低压缩比），-9或–best表示最慢压缩方法（高压缩比）。系统缺省值为6</td>
+</tr>
+</tbody>
+</table>
+<p>说明：压缩文件后缀为 gz</p>
+<h3><span id="bzip2">bzip2</span></h3>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>语法</th>
+<th>参数</th>
+<th>参数说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bzip2</td>
+<td>bzip2 [-cdz]</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>-d</td>
+<td>解压缩</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>-z</td>
+<td>压缩参数</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>-num</td>
+<td>用指定的数字num调整压缩的速度，-1或–fast表示最快压缩方法（低压缩比），-9或–best表示最慢压缩方法（高压缩比）。系统缺省值为6</td>
+</tr>
+</tbody>
+</table>
+<p>说明：压缩文件后缀为 bz2</p>
+<h3><span id="3-安装包">3、安装包</span></h3>
+<p>centos：下是使用yum install 软件名 卸载使用yum remove 软件名</p>
+<p>Ubuntu：apt-get install 文件名 卸载使用apt-get remove 文件名</p>
+<h4><span id="centos修改数据源">centos修改数据源：</span></h4>
+<p>超简单将Centos的yum源更换为国内的阿里云源</p>
+<h4><span id="1-备份">1、备份</span></h4>
+<p><code>mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup</code>、</p>
+<h4><span id="2-下载新的centos-baserepo-到etcyumreposd">2、下载新的CentOS-Base.repo 到/etc/yum.repos.d/</span></h4>
+<h5><span id="centos-5">CentOS 5</span></h5>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-5.repo</span><br></pre></td></tr></table></figure>
+<h5><span id="centos-6">CentOS 6</span></h5>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-6.repo</span><br></pre></td></tr></table></figure>
+<h5><span id="centos-7">CentOS 7</span></h5>
+<p><code>wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</code></p>
+<h4><span id="3-运行yum-makecache生成缓存">3、运行yum makecache生成缓存</span></h4>
+<h4><span id="ubuntu">Ubuntu：</span></h4>
+<h4><span id="编辑数据源">编辑数据源</span></h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
+<p>删除全部内容并修改为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial main restricted universe multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted universe multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted universe multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse</span><br></pre></td></tr></table></figure>
+<h4><span id="更新数据源">更新数据源</span></h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get update</span><br></pre></td></tr></table></figure>
+<h3><span id="4-文件权限">4、文件权限</span></h3>
+<p>r 读</p>
+<p>w 写</p>
+<p>x 执行</p>
+<p>ls –al<code>使用 ls 不带参数只显示文件名称，通过</code>ls –al` 可以显示文件或者目录的权限信息。</p>
+<p><code>ls -l 文件名</code> 显示信息包括：文件类型 (<code>d</code> 目录，<code>-</code> 普通文件，<code>l</code> 链接文件)，文件权限，文件的用户，文件的所属组，文件的大小，文件的创建时间，文件的名称</p>
+<p><code>-rw-r--r-- 1 lusifer lusifer 675 Oct 26 17:20 .profile</code></p>
+<ul>
+<li><code>-</code>：普通文件</li>
+<li><code>rw-</code>：说明用户 lusifer 有读写权限，没有运行权限</li>
+<li><code>r--</code>：表示用户组 lusifer 只有读权限，没有写和运行的权限</li>
+<li><code>r--</code>：其他用户只有读权限，没有写权限和运行的权限</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>-rw-r–r–</th>
+<th>1</th>
+<th>lusifer</th>
+<th>lusifer</th>
+<th>675</th>
+<th>Oct 26 17:20</th>
+<th>.profile</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>文档类型及权限</td>
+<td>连接数</td>
+<td>文档所属用户</td>
+<td>文档所属组</td>
+<td>文档大小</td>
+<td>文档最后被修改日期</td>
+<td>文档名称</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>-</th>
+<th>rw-</th>
+<th>r–</th>
+<th>r–</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>文档类型</td>
+<td>文档所有者权限（user）</td>
+<td>文档所属用户组权限（group）</td>
+<td>其他用户权限（other）</td>
+</tr>
+</tbody>
+</table>
+<p>文档类型</p>
+<ul>
+<li><code>d</code> 表示目录</li>
+<li><code>l</code> 表示软连接</li>
+<li><code>–</code> 表示文件</li>
+<li><code>c</code> 表示串行端口字符设备文件</li>
+<li><code>b</code> 表示可供存储的块设备文件</li>
+<li>余下的字符 3 个字符为一组。<code>r</code> 只读，<code>w</code> 可写，<code>x</code> 可执行，<code>-</code> 表示无此权限</li>
+</ul>
+<h4><span id="连接数">连接数</span></h4>
+<p>指有多少个文件指向同一个索引节点。</p>
+<h4><span id="文档所属用户和所属组">文档所属用户和所属组</span></h4>
+<p>就是文档属于哪个用户和用户组。文件所属用户和组是可以更改的</p>
+<h4><span id="文档大小">文档大小</span></h4>
+<p>默认是 bytes</p>
+<h4><span id="chown">chown</span></h4>
+<p>是 change owner 的意思，主要作用就是改变文件或者目录所有者，所有者包含用户和用户组</p>
+<p><code>chown [-R] 用户名称 文件或者目录</code></p>
+<p><code>chown [-R] 用户名称 用户组名称 文件或目录</code></p>
+<p>-R：进行递归式的权限更改，将目录下的所有文件、子目录更新为指定用户组权限</p>
+<h4><span id="chmod">chmod</span></h4>
+<p>简单实用化chmod 直接使用chmod +x shell.sh对这个文件赋予可执行权限</p>
+<p>不使用x执行权限   chmod -x <a href="http://shell.sh" target="_blank" rel="noopener">shell.sh</a></p>
+<p>执行shell.sh使用路径下的文件<img src="C:%5CUsers%5CADMINI~1.WIN%5CAppData%5CLocal%5CTemp%5C1534684170468.png" alt="1534684170468"></p>
+<p><img src="C:%5CUsers%5CADMINI~1.WIN%5CAppData%5CLocal%5CTemp%5C1534684028323.png" alt="1534684028323"></p>
+<p>改变访问权限</p>
+<p><code>chmod [who] [+ | - | =] [mode] 文件名</code></p>
+<h5><span id="who">who</span></h5>
+<p>表示操作对象可以是以下字母的一个或者组合</p>
+<ul>
+<li>u：用户 user</li>
+<li>g：用户组 group</li>
+<li>o：表示其他用户</li>
+<li>a：表示所有用户是系统默认的</li>
+</ul>
+<h5><span id="操作符号">操作符号</span></h5>
+<ul>
+<li>+：表示添加某个权限</li>
+<li>-：表示取消某个权限</li>
+<li>=：赋予给定的权限，取消文档以前的所有权限</li>
+</ul>
+<h5><span id="mode">mode</span></h5>
+<p>表示可执行的权限，可以是 r、w、x</p>
+<h5><span id="文件名">文件名</span></h5>
+<p>文件名可以使空格分开的文件列表</p>
+<h5><span id="示例">示例</span></h5>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">lusifer@UbuntuBase:~$ ls -al test.txt </span><br><span class="line">-rw-rw-r-- 1 lusifer lusifer 6 Nov  2 21:47 test.txt</span><br><span class="line">lusifer@UbuntuBase:~$ chmod u=rwx,g+r,o+r test.txt </span><br><span class="line">lusifer@UbuntuBase:~$ ls -al test.txt </span><br><span class="line">-rwxrw-r-- 1 lusifer lusifer 6 Nov  2 21:47 test.txt</span><br><span class="line">lusifer@UbuntuBase:~$</span><br></pre></td></tr></table></figure>
+<h3><span id="5-数字设定法">5、数字设定法</span></h3>
+<p>数字设定法中数字表示的含义</p>
+<ul>
+<li>0 表示没有任何权限</li>
+<li>1 表示有可执行权限 = <code>x</code></li>
+<li>2 表示有可写权限 = <code>w</code></li>
+<li>4 表示有可读权限 = <code>r</code></li>
+</ul>
+<p>也可以用数字来表示权限如 chmod 755 file_name</p>
+<table>
+<thead>
+<tr>
+<th>r w x</th>
+<th>r – x</th>
+<th>r - x</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4 2 1</td>
+<td>4 - 1</td>
+<td>4 - 1</td>
+</tr>
+<tr>
+<td>user</td>
+<td>group</td>
+<td>others</td>
+</tr>
+</tbody>
+</table>
+<p>若要 rwx 属性则 4+2+1=7</p>
+<p>若要 rw- 属性则 4+2=6</p>
+<p>若要 r-x 属性则 4+1=5</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">lusifer@UbuntuBase:~$ chmod 777 test.txt </span><br><span class="line">lusifer@UbuntuBase:~$ ls -al test.txt </span><br><span class="line">-rwxrwxrwx 1 lusifer lusifer 6 Nov  2 21:47 test.txt</span><br><span class="line"></span><br><span class="line">lusifer@UbuntuBase:~$ chmod 770 test.txt </span><br><span class="line">lusifer@UbuntuBase:~$ ls -al test.txt </span><br><span class="line">-rwxrwx--- 1 lusifer lusifer 6 Nov  2 21:47 test.txt</span><br></pre></td></tr></table></figure>
+<h2><span id="五-java安装">五、JAVA安装</span></h2>
+<h3><span id="linux-安装-java">Linux 安装 Java</span></h3>
+<p>此处以 JDK 1.8.0_152 为例</p>
+<h4><span id="下载地址">下载地址</span></h4>
+<p><a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank" rel="noopener">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a></p>
+<h4><span id="解压缩并移动到指定目录">解压缩并移动到指定目录</span></h4>
+<h5><span id="解压缩">解压缩</span></h5>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf jdk-8u152-linux-x64.tar.gz</span><br></pre></td></tr></table></figure>
+<h5><span id="创建目录">创建目录</span></h5>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /usr/local/java</span><br></pre></td></tr></table></figure>
+<h5><span id="移动安装包">移动安装包</span></h5>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv jdk1.8.0_152/ /usr/local/java/</span><br></pre></td></tr></table></figure>
+<h5><span id="设置所有者">设置所有者</span></h5>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown -R root:root /usr/local/java/</span><br></pre></td></tr></table></figure>
+<h4><span id="配置环境变量">配置环境变量</span></h4>
+<h5><span id="配置系统环境变量">配置系统环境变量</span></h5>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nano /etc/environment</span><br></pre></td></tr></table></figure>
+<h5><span id="添加如下语句">添加如下语句</span></h5>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PATH=&quot;/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games&quot;</span><br><span class="line">export JAVA_HOME=/usr/local/java/jdk1.8.0_152</span><br><span class="line">export JRE_HOME=/usr/local/java/jdk1.8.0_152/jre</span><br><span class="line">export CLASSPATH=$CLASSPATH:$JAVA_HOME/lib:$JAVA_HOME/jre/lib</span><br></pre></td></tr></table></figure>
+<h5><span id="配置用户环境变量">配置用户环境变量</span></h5>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nano /etc/profile</span><br></pre></td></tr></table></figure>
+<h5><span id="添加如下语句">添加如下语句</span></h5>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">if [ &quot;$PS1&quot; ]; then</span><br><span class="line">  if [ &quot;$BASH&quot; ] &amp;&amp; [ &quot;$BASH&quot; != &quot;/bin/sh&quot; ]; then</span><br><span class="line">    # The file bash.bashrc already sets the default PS1.</span><br><span class="line">    # PS1=&apos;\h:\w\$ &apos;</span><br><span class="line">    if [ -f /etc/bash.bashrc ]; then</span><br><span class="line">      . /etc/bash.bashrc</span><br><span class="line">    fi</span><br><span class="line">  else</span><br><span class="line">    if [ &quot;`id -u`&quot; -eq 0 ]; then</span><br><span class="line">      PS1=&apos;# &apos;</span><br><span class="line">    else</span><br><span class="line">      PS1=&apos;$ &apos;</span><br><span class="line">    fi</span><br><span class="line">  fi</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">export JAVA_HOME=/usr/local/java/jdk1.8.0_152</span><br><span class="line">export JRE_HOME=/usr/local/java/jdk1.8.0_152/jre</span><br><span class="line">export CLASSPATH=$CLASSPATH:$JAVA_HOME/lib:$JAVA_HOME/jre/lib</span><br><span class="line">export PATH=$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH:$HOME/bin</span><br><span class="line"></span><br><span class="line">if [ -d /etc/profile.d ]; then</span><br><span class="line">  for i in /etc/profile.d/*.sh; do</span><br><span class="line">    if [ -r $i ]; then</span><br><span class="line">      . $i</span><br><span class="line">    fi</span><br><span class="line">  done</span><br><span class="line">  unset i</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<h5><span id="使用户环境变量生效">使用户环境变量生效</span></h5>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+<h4><span id="测试是否安装成功">测试是否安装成功</span></h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@UbuntuBase:/usr/local/java# java -version</span><br><span class="line">java version &quot;1.8.0_152&quot;</span><br><span class="line">Java(TM) SE Runtime Environment (build 1.8.0_152-b16)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.152-b16, mixed mode)</span><br></pre></td></tr></table></figure>
+<h4><span id="为其他用户更新用户环境变量">为其他用户更新用户环境变量</span></h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">su lusifer</span><br><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+<h3><span id="六-yum">六、yum</span></h3>
+<p>更新yum</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum update</span><br></pre></td></tr></table></figure>
+<h3><span id="七-文件目录代表的意思">七、文件目录代表的意思</span></h3>
+<h4><span id="etc-放置配置文件"><code>etc</code> 放置配置文件</span></h4>
+<h4><span id="var-放置数据文件一般日志"><code>var</code> 放置数据文件一般日志</span></h4>
+<h4><span id="usr-一般放置用户的一些数据文件等"><code>usr</code> 一般放置用户的一些数据文件等</span></h4>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/开发工具/vscode/vscode git/" data-toggle="tooltip" data-placement="top" title="关于vscode(一)">&larr; 上一页</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/article/docker/install-docker/" data-toggle="tooltip" data-placement="top" title="[Docker] 安装Docker">下一页 &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <br>
+                
+                <!-- require APlayer -->
+                
+                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+                    <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/meting@1.2/dist/Meting.min.js"></script>
+    
+                    <div class="aplayer"
+                        data-id="738933413"
+                        data-server="tencent"
+                        data-type="playlist"
+                        data-fixed="true" 
+                        data-autoplay="undefined" >
+                    </div>
+                
+                
+                
+
+                <br>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+                    <!-- disqus 评论框 start -->
+                    <div class="comment">
+                        <div id="lv-container" data-id="city" data-uid="MTAyMC80MDgyMi8xNzM0Nw=="></div>
+                    </div>
+                    <!-- disqus 评论框 end -->
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">特色标签</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#linux" title="linux">linux</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+    <!-- 来必力City版公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
+    
+           if (typeof LivereTower === 'function') { return; }
+    
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
+    
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    <!-- 来必力City版 公共JS代码 end -->
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/superzzp">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/superzzp">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/superzzp">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/superzzp">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; zz胖的博客 2020 
+                    <br>
+                    Theme by <a href="http://zzpblog.cn">zzp</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://www.zzpblog.cn">zz胖</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://github.com/zzpsuper/zzpsuper.github.io" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://zzpblog.cn/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '938dd925deefb971d57c9b42ae09c5da';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://zzpblog.cn/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

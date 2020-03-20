@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="2xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content>
+    <meta name="keyword" content="博客，技术，java">
+    <meta name="baidu-site-verification" content="2LpjigRhJ6">
+    <link rel="shortcut icon" href="/img/ironman-draw.ico">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          docker-compose 模板文件 - zz胖的博客 | Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://zzpblog.cn/虚拟化技术/docker/Docker-compose模板文件/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('http://ozilwgpje.bkt.clouddn.com/blog/article.jpg?imageslim')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Docker" title="Docker">Docker</a>
+                            
+                        </div>
+                        <h1>docker-compose 模板文件</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by zz胖的博客 on
+                            2018-09-28
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">zz胖的博客-技术永无止境</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">主页</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">关于我</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">文章</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">标签</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>&lt;Excerpt in index | 首页摘要&gt;<br>
+docker-compose 模板文件</p>
+<a id="more"></a>
+<p>&lt;The rest of contents | 余下全文&gt;</p>
+<h1><span id="docker-compose-模板文件">docker-compose 模板文件</span></h1>
+<p>模板文件是使用 <code>Compose</code> 的核心，涉及到的指令关键字也比较多。但大家不用担心，这里面大部分指令跟 <code>docker run</code> 相关参数的含义都是类似的。</p>
+<p>默认的模板文件名称为 <code>docker-compose.yml</code>，格式为 YAML 格式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">version: &quot;3&quot;</span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  webapp:</span><br><span class="line">    image: examples/web</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;80:80&quot;</span><br><span class="line">    volumes:</span><br><span class="line">      - &quot;/data&quot;</span><br></pre></td></tr></table></figure>
+<p>注意每个服务都必须通过 <code>image</code> 指令指定镜像或 <code>build</code> 指令（需要 Dockerfile）等来自动构建生成镜像。</p>
+<p>如果使用 <code>build</code> 指令，在 <code>Dockerfile</code> 中设置的选项(例如：<code>CMD</code>, <code>EXPOSE</code>, <code>VOLUME</code>, <code>ENV</code> 等) 将会自动被获取，无需在 <code>docker-compose.yml</code> 中再次设置。</p>
+<p>下面分别介绍各个指令的用法。</p>
+<h3><span id="build"><code>build</code></span></h3>
+<p>指定 <code>Dockerfile</code> 所在文件夹的路径（可以是绝对路径，或者相对 docker-compose.yml 文件的路径）。 <code>Compose</code> 将会利用它自动构建这个镜像，然后使用这个镜像。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">version: &apos;3&apos;</span><br><span class="line">services:</span><br><span class="line"></span><br><span class="line">  webapp:</span><br><span class="line">    build: ./dir</span><br></pre></td></tr></table></figure>
+<p>你也可以使用 <code>context</code> 指令指定 <code>Dockerfile</code> 所在文件夹的路径。</p>
+<p>使用 <code>dockerfile</code> 指令指定 <code>Dockerfile</code> 文件名。</p>
+<p>使用 <code>arg</code> 指令指定构建镜像时的变量。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">version: &apos;3&apos;</span><br><span class="line">services:</span><br><span class="line"></span><br><span class="line">  webapp:</span><br><span class="line">    build:</span><br><span class="line">      context: ./dir</span><br><span class="line">      dockerfile: Dockerfile-alternate</span><br><span class="line">      args:</span><br><span class="line">        buildno: 1</span><br></pre></td></tr></table></figure>
+<p>使用 <code>cache_from</code> 指定构建镜像的缓存</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">build:</span><br><span class="line">  context: .</span><br><span class="line">  cache_from:</span><br><span class="line">    - alpine:latest</span><br><span class="line">    - corp/web_app:3.14</span><br></pre></td></tr></table></figure>
+<h3><span id="cap_add-cap_drop"><code>cap_add, cap_drop</code></span></h3>
+<p>指定容器的内核能力（capacity）分配。</p>
+<p>例如，让容器拥有所有能力可以指定为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cap_add:</span><br><span class="line">  - ALL</span><br></pre></td></tr></table></figure>
+<p>去掉 NET_ADMIN 能力可以指定为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cap_drop:</span><br><span class="line">  - NET_ADMIN</span><br></pre></td></tr></table></figure>
+<h3><span id="command"><code>command</code></span></h3>
+<p>覆盖容器启动后默认执行的命令。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">command: echo &quot;hello world&quot;</span><br></pre></td></tr></table></figure>
+<h3><span id="configs"><code>configs</code></span></h3>
+<p>仅用于 <code>Swarm mode</code></p>
+<h3><span id="cgroup_parent"><code>cgroup_parent</code></span></h3>
+<p>指定父 <code>cgroup</code> 组，意味着将继承该组的资源限制。</p>
+<p>例如，创建了一个 cgroup 组名称为 <code>cgroups_1</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cgroup_parent: cgroups_1</span><br></pre></td></tr></table></figure>
+<h3><span id="container_name"><code>container_name</code></span></h3>
+<p>指定容器名称。默认将会使用 <code>项目名称_服务名称_序号</code> 这样的格式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">container_name: docker-web-container</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意: 指定容器名称后，该服务将无法进行扩展（scale），因为 Docker 不允许多个容器具有相同的名称。</p>
+</blockquote>
+<h3><span id="deploy"><code>deploy</code></span></h3>
+<p>仅用于 <code>Swarm mode</code></p>
+<h3><span id="devices"><code>devices</code></span></h3>
+<p>指定设备映射关系。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">devices:</span><br><span class="line">  - &quot;/dev/ttyUSB1:/dev/ttyUSB0&quot;</span><br></pre></td></tr></table></figure>
+<h3><span id="depends_on"><code>depends_on</code></span></h3>
+<p>解决容器的依赖、启动先后的问题。以下例子中会先启动 <code>redis</code> <code>db</code> 再启动 <code>web</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">version: &apos;3&apos;</span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  web:</span><br><span class="line">    build: .</span><br><span class="line">    depends_on:</span><br><span class="line">      - db</span><br><span class="line">      - redis</span><br><span class="line"></span><br><span class="line">  redis:</span><br><span class="line">    image: redis</span><br><span class="line"></span><br><span class="line">  db:</span><br><span class="line">    image: postgres</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：<code>web</code> 服务不会等待 <code>redis</code> <code>db</code> 「完全启动」之后才启动。</p>
+</blockquote>
+<h3><span id="dns"><code>dns</code></span></h3>
+<p>自定义 <code>DNS</code> 服务器。可以是一个值，也可以是一个列表。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dns: 8.8.8.8</span><br><span class="line"></span><br><span class="line">dns:</span><br><span class="line">  - 8.8.8.8</span><br><span class="line">  - 114.114.114.114</span><br></pre></td></tr></table></figure>
+<h3><span id="dns_search"><code>dns_search</code></span></h3>
+<p>配置 <code>DNS</code> 搜索域。可以是一个值，也可以是一个列表。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dns_search: example.com</span><br><span class="line"></span><br><span class="line">dns_search:</span><br><span class="line">  - domain1.example.com</span><br><span class="line">  - domain2.example.com</span><br></pre></td></tr></table></figure>
+<h3><span id="tmpfs"><code>tmpfs</code></span></h3>
+<p>挂载一个 tmpfs 文件系统到容器。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tmpfs: /run</span><br><span class="line">tmpfs:</span><br><span class="line">  - /run</span><br><span class="line">  - /tmp</span><br></pre></td></tr></table></figure>
+<h3><span id="env_file"><code>env_file</code></span></h3>
+<p>从文件中获取环境变量，可以为单独的文件路径或列表。</p>
+<p>如果通过 <code>docker-compose -f FILE</code> 方式来指定 Compose 模板文件，则 <code>env_file</code> 中变量的路径会基于模板文件路径。</p>
+<p>如果有变量名称与 <code>environment</code> 指令冲突，则按照惯例，以后者为准。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">env_file: .env</span><br><span class="line"></span><br><span class="line">env_file:</span><br><span class="line">  - ./common.env</span><br><span class="line">  - ./apps/web.env</span><br><span class="line">  - /opt/secrets.env</span><br></pre></td></tr></table></figure>
+<p>环境变量文件中每一行必须符合格式，支持 <code>#</code> 开头的注释行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># common.env: Set development environment</span><br><span class="line">PROG_ENV=development</span><br></pre></td></tr></table></figure>
+<h3><span id="environment"><code>environment</code></span></h3>
+<p>设置环境变量。你可以使用数组或字典两种格式。</p>
+<p>只给定名称的变量会自动获取运行 Compose 主机上对应变量的值，可以用来防止泄露不必要的数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">environment:</span><br><span class="line">  RACK_ENV: development</span><br><span class="line">  SESSION_SECRET:</span><br><span class="line"></span><br><span class="line">environment:</span><br><span class="line">  - RACK_ENV=development</span><br><span class="line">  - SESSION_SECRET</span><br></pre></td></tr></table></figure>
+<p>如果变量名称或者值中用到 <code>true|false，yes|no</code> 等表达 <a href="http://yaml.org/type/bool.html" target="_blank" rel="noopener">布尔</a> 含义的词汇，最好放到引号里，避免 YAML 自动解析某些内容为对应的布尔语义。这些特定词汇，包括</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y|Y|yes|Yes|YES|n|N|no|No|NO|true|True|TRUE|false|False|FALSE|on|On|ON|off|Off|OFF</span><br></pre></td></tr></table></figure>
+<h3><span id="expose"><code>expose</code></span></h3>
+<p>暴露端口，但不映射到宿主机，只被连接的服务访问。</p>
+<p>仅可以指定内部端口为参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">expose:</span><br><span class="line"> - &quot;3000&quot;</span><br><span class="line"> - &quot;8000&quot;</span><br></pre></td></tr></table></figure>
+<h3><span id="external_links"><code>external_links</code></span></h3>
+<blockquote>
+<p>注意：不建议使用该指令。</p>
+</blockquote>
+<p>链接到 <code>docker-compose.yml</code> 外部的容器，甚至并非 <code>Compose</code> 管理的外部容器。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">external_links:</span><br><span class="line"> - redis_1</span><br><span class="line"> - project_db_1:mysql</span><br><span class="line"> - project_db_1:postgresql</span><br></pre></td></tr></table></figure>
+<h3><span id="extra_hosts"><code>extra_hosts</code></span></h3>
+<p>类似 Docker 中的 <code>--add-host</code> 参数，指定额外的 host 名称映射信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">extra_hosts:</span><br><span class="line"> - &quot;googledns:8.8.8.8&quot;</span><br><span class="line"> - &quot;dockerhub:52.1.157.61&quot;</span><br></pre></td></tr></table></figure>
+<p>会在启动后的服务容器中 <code>/etc/hosts</code> 文件中添加如下两条条目。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">8.8.8.8 googledns</span><br><span class="line">52.1.157.61 dockerhub</span><br></pre></td></tr></table></figure>
+<h3><span id="healthcheck"><code>healthcheck</code></span></h3>
+<p>通过命令检查容器是否健康运行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">healthcheck:</span><br><span class="line">  test: [&quot;CMD&quot;, &quot;curl&quot;, &quot;-f&quot;, &quot;http://localhost&quot;]</span><br><span class="line">  interval: 1m30s</span><br><span class="line">  timeout: 10s</span><br><span class="line">  retries: 3</span><br></pre></td></tr></table></figure>
+<h3><span id="image"><code>image</code></span></h3>
+<p>指定为镜像名称或镜像 ID。如果镜像在本地不存在，<code>Compose</code> 将会尝试拉取这个镜像。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">image: ubuntu</span><br><span class="line">image: orchardup/postgresql</span><br><span class="line">image: a4bc65fd</span><br></pre></td></tr></table></figure>
+<h3><span id="labels"><code>labels</code></span></h3>
+<p>为容器添加 Docker 元数据（metadata）信息。例如可以为容器添加辅助说明信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">labels:</span><br><span class="line">  com.startupteam.description: &quot;webapp for a startup team&quot;</span><br><span class="line">  com.startupteam.department: &quot;devops department&quot;</span><br><span class="line">  com.startupteam.release: &quot;rc3 for v1.0&quot;</span><br></pre></td></tr></table></figure>
+<h3><span id="links"><code>links</code></span></h3>
+<blockquote>
+<p>注意：不推荐使用该指令。</p>
+</blockquote>
+<h3><span id="logging"><code>logging</code></span></h3>
+<p>配置日志选项。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">logging:</span><br><span class="line">  driver: syslog</span><br><span class="line">  options:</span><br><span class="line">    syslog-address: &quot;tcp://192.168.0.42:123&quot;</span><br></pre></td></tr></table></figure>
+<p>目前支持三种日志驱动类型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">driver: &quot;json-file&quot;</span><br><span class="line">driver: &quot;syslog&quot;</span><br><span class="line">driver: &quot;none&quot;</span><br></pre></td></tr></table></figure>
+<p><code>options</code> 配置日志驱动的相关参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">options:</span><br><span class="line">  max-size: &quot;200k&quot;</span><br><span class="line">  max-file: &quot;10&quot;</span><br></pre></td></tr></table></figure>
+<h3><span id="network_mode"><code>network_mode</code></span></h3>
+<p>设置网络模式。使用和 <code>docker run</code> 的 <code>--network</code> 参数一样的值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">network_mode: &quot;bridge&quot;</span><br><span class="line">network_mode: &quot;host&quot;</span><br><span class="line">network_mode: &quot;none&quot;</span><br><span class="line">network_mode: &quot;service:[service name]&quot;</span><br><span class="line">network_mode: &quot;container:[container name/id]&quot;</span><br></pre></td></tr></table></figure>
+<h3><span id="networks"><code>networks</code></span></h3>
+<p>配置容器连接的网络。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">version: &quot;3&quot;</span><br><span class="line">services:</span><br><span class="line"></span><br><span class="line">  some-service:</span><br><span class="line">    networks:</span><br><span class="line">     - some-network</span><br><span class="line">     - other-network</span><br><span class="line"></span><br><span class="line">networks:</span><br><span class="line">  some-network:</span><br><span class="line">  other-network:</span><br></pre></td></tr></table></figure>
+<h3><span id="pid"><code>pid</code></span></h3>
+<p>跟主机系统共享进程命名空间。打开该选项的容器之间，以及容器和宿主机系统之间可以通过进程 ID 来相互访问和操作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pid: &quot;host&quot;</span><br></pre></td></tr></table></figure>
+<h3><span id="ports"><code>ports</code></span></h3>
+<p>暴露端口信息。</p>
+<p>使用宿主端口：容器端口 <code>(HOST:CONTAINER)</code> 格式，或者仅仅指定容器的端口（宿主将会随机选择端口）都可以。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ports:</span><br><span class="line"> - &quot;3000&quot;</span><br><span class="line"> - &quot;8000:8000&quot;</span><br><span class="line"> - &quot;49100:22&quot;</span><br><span class="line"> - &quot;127.0.0.1:8001:8001&quot;</span><br></pre></td></tr></table></figure>
+<p><em>注意：当使用 HOST:CONTAINER 格式来映射端口时，如果你使用的容器端口小于 60 并且没放到引号里，可能会得到错误结果，因为 YAML 会自动解析 xx:yy 这种数字格式为 60 进制。为避免出现这种问题，建议数字串都采用引号包括起来的字符串格式。</em></p>
+<h3><span id="secrets"><code>secrets</code></span></h3>
+<p>存储敏感数据，例如 <code>mysql</code> 服务密码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">version: &quot;3.1&quot;</span><br><span class="line">services:</span><br><span class="line"></span><br><span class="line">mysql:</span><br><span class="line">  image: mysql</span><br><span class="line">  environment:</span><br><span class="line">    MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_password</span><br><span class="line">  secrets:</span><br><span class="line">    - db_root_password</span><br><span class="line">    - my_other_secret</span><br><span class="line"></span><br><span class="line">secrets:</span><br><span class="line">  my_secret:</span><br><span class="line">    file: ./my_secret.txt</span><br><span class="line">  my_other_secret:</span><br><span class="line">    external: true</span><br></pre></td></tr></table></figure>
+<h3><span id="security_opt"><code>security_opt</code></span></h3>
+<p>指定容器模板标签（label）机制的默认属性（用户、角色、类型、级别等）。例如配置标签的用户名和角色名。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">security_opt:</span><br><span class="line">    - label:user:USER</span><br><span class="line">    - label:role:ROLE</span><br></pre></td></tr></table></figure>
+<h3><span id="stop_signal"><code>stop_signal</code></span></h3>
+<p>设置另一个信号来停止容器。在默认情况下使用的是 SIGTERM 停止容器。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stop_signal: SIGUSR1</span><br></pre></td></tr></table></figure>
+<h3><span id="sysctls"><code>sysctls</code></span></h3>
+<p>配置容器内核参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sysctls:</span><br><span class="line">  net.core.somaxconn: 1024</span><br><span class="line">  net.ipv4.tcp_syncookies: 0</span><br><span class="line"></span><br><span class="line">sysctls:</span><br><span class="line">  - net.core.somaxconn=1024</span><br><span class="line">  - net.ipv4.tcp_syncookies=0</span><br></pre></td></tr></table></figure>
+<h3><span id="ulimits"><code>ulimits</code></span></h3>
+<p>指定容器的 ulimits 限制值。</p>
+<p>例如，指定最大进程数为 65535，指定文件句柄数为 20000（软限制，应用可以随时修改，不能超过硬限制） 和 40000（系统硬限制，只能 root 用户提高）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ulimits:</span><br><span class="line">  nproc: 65535</span><br><span class="line">  nofile:</span><br><span class="line">    soft: 20000</span><br><span class="line">    hard: 40000</span><br></pre></td></tr></table></figure>
+<h3><span id="volumes"><code>volumes</code></span></h3>
+<p>数据卷所挂载路径设置。可以设置宿主机路径 （<code>HOST:CONTAINER</code>） 或加上访问模式 （<code>HOST:CONTAINER:ro</code>）。</p>
+<p>该指令中路径支持相对路径。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">volumes:</span><br><span class="line"> - /var/lib/mysql</span><br><span class="line"> - cache/:/tmp/cache</span><br><span class="line"> - ~/configs:/etc/configs/:ro</span><br></pre></td></tr></table></figure>
+<h3><span id="其它指令">其它指令</span></h3>
+<p>此外，还有包括 <code>domainname, entrypoint, hostname, ipc, mac_address, privileged, read_only, shm_size, restart, stdin_open, tty, user, working_dir</code>等指令，基本跟 <code>docker run</code> 中对应参数的功能一致。</p>
+<p>指定服务容器启动后执行的入口文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">entrypoint: /code/entrypoint.sh</span><br></pre></td></tr></table></figure>
+<p>指定容器中运行应用的用户名。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user: nginx</span><br></pre></td></tr></table></figure>
+<p>指定容器中工作目录。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">working_dir: /code</span><br></pre></td></tr></table></figure>
+<p>指定容器中搜索域名、主机名、mac 地址等。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">domainname: your_website.com</span><br><span class="line">hostname: test</span><br><span class="line">mac_address: 08-00-27-00-0C-0A</span><br></pre></td></tr></table></figure>
+<p>允许容器中运行一些特权命令。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">privileged: true</span><br></pre></td></tr></table></figure>
+<p>指定容器退出后的重启策略为始终重启。该命令对保持服务始终运行十分有效，在生产环境中推荐配置为 <code>always</code> 或者 <code>unless-stopped</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">restart: always</span><br></pre></td></tr></table></figure>
+<p>以只读模式挂载容器的 root 文件系统，意味着不能对容器内容进行修改。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">read_only: true</span><br></pre></td></tr></table></figure>
+<p>打开标准输入，可以接受外部输入。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stdin_open: true</span><br></pre></td></tr></table></figure>
+<p>模拟一个伪终端。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tty: true</span><br></pre></td></tr></table></figure>
+<h3><span id="读取变量">读取变量</span></h3>
+<p>Compose 模板文件支持动态读取主机的系统环境变量和当前目录下的 <code>.env</code> 文件中的变量。</p>
+<p>例如，下面的 Compose 文件将从运行它的环境中读取变量 <code>${MONGO_VERSION}</code> 的值，并写入执行的指令中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">version: &quot;3&quot;</span><br><span class="line">services:</span><br><span class="line"></span><br><span class="line">db:</span><br><span class="line">  image: &quot;mongo:$&#123;MONGO_VERSION&#125;&quot;</span><br></pre></td></tr></table></figure>
+<p>如果执行 <code>MONGO_VERSION=3.2 docker-compose up</code> 则会启动一个 <code>mongo:3.2</code> 镜像的容器；如果执行 <code>MONGO_VERSION=2.8 docker-compose up</code> 则会启动一个 <code>mongo:2.8</code> 镜像的容器。</p>
+<p>若当前目录存在 <code>.env</code> 文件，执行 <code>docker-compose</code> 命令时将从该文件中读取变量。</p>
+<p>在当前目录新建 <code>.env</code> 文件并写入以下内容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 支持 # 号注释</span><br><span class="line">MONGO_VERSION=3.6</span><br></pre></td></tr></table></figure>
+<p>执行 <code>docker-compose up</code> 则会启动一个 <code>mongo:3.6</code> 镜像的容器。</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/虚拟化技术/docker/Docker常用指令操作/" data-toggle="tooltip" data-placement="top" title="docker命令总结">&larr; 上一页</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/虚拟化技术/docker/Docker-compose命令/" data-toggle="tooltip" data-placement="top" title="docker-compose 命令">下一页 &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <br>
+                
+                <!-- require APlayer -->
+                
+                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+                    <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/meting@1.2/dist/Meting.min.js"></script>
+    
+                    <div class="aplayer"
+                        data-id="738933413"
+                        data-server="tencent"
+                        data-type="playlist"
+                        data-fixed="true" 
+                        data-autoplay="undefined" >
+                    </div>
+                
+                
+                
+
+                <br>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+                    <!-- disqus 评论框 start -->
+                    <div class="comment">
+                        <div id="lv-container" data-id="city" data-uid="MTAyMC80MDgyMi8xNzM0Nw=="></div>
+                    </div>
+                    <!-- disqus 评论框 end -->
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">特色标签</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Docker" title="Docker">Docker</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+    <!-- 来必力City版公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
+    
+           if (typeof LivereTower === 'function') { return; }
+    
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
+    
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    <!-- 来必力City版 公共JS代码 end -->
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/superzzp">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/superzzp">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/superzzp">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/superzzp">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; zz胖的博客 2020 
+                    <br>
+                    Theme by <a href="http://zzpblog.cn">zzp</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://www.zzpblog.cn">zz胖</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://github.com/zzpsuper/zzpsuper.github.io" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://zzpblog.cn/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '938dd925deefb971d57c9b42ae09c5da';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://zzpblog.cn/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

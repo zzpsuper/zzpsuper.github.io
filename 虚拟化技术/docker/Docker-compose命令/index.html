@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="2xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content>
+    <meta name="keyword" content="博客，技术，java">
+    <meta name="baidu-site-verification" content="2LpjigRhJ6">
+    <link rel="shortcut icon" href="/img/ironman-draw.ico">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          docker-compose 命令 - zz胖的博客 | Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://zzpblog.cn/虚拟化技术/docker/Docker-compose命令/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('http://ozilwgpje.bkt.clouddn.com/blog/article.jpg?imageslim')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Docker" title="Docker">Docker</a>
+                            
+                        </div>
+                        <h1>docker-compose 命令</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by zz胖的博客 on
+                            2018-09-28
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">zz胖的博客-技术永无止境</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">主页</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">关于我</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">文章</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">标签</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>&lt;Excerpt in index | 首页摘要&gt;<br>
+docker-compose 命令</p>
+<a id="more"></a>
+<p>&lt;The rest of contents | 余下全文&gt;</p>
+<h1><span id="docker-compose-命令">docker-compose 命令</span></h1>
+<h3><span id="命令对象与格式">命令对象与格式</span></h3>
+<p>对于 Compose 来说，大部分命令的对象既可以是项目本身，也可以指定为项目中的服务或者容器。如果没有特别的说明，命令对象将是项目，这意味着项目中所有的服务都会受到命令影响。</p>
+<p>执行 <code>docker-compose [COMMAND] --help</code> 或者 <code>docker-compose help [COMMAND]</code> 可以查看具体某个命令的使用格式。</p>
+<p><code>docker-compose</code> 命令的基本的使用格式是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose [-f=&lt;arg&gt;...] [options] [COMMAND] [ARGS...]</span><br></pre></td></tr></table></figure>
+<h3><span id="命令选项">命令选项</span></h3>
+<ul>
+<li><code>-f, --file FILE</code> 指定使用的 Compose 模板文件，默认为 <code>docker-compose.yml</code>，可以多次指定。</li>
+<li><code>-p, --project-name NAME</code> 指定项目名称，默认将使用所在目录名称作为项目名。</li>
+<li><code>--x-networking</code> 使用 Docker 的可拔插网络后端特性</li>
+<li><code>--x-network-driver DRIVER</code> 指定网络后端的驱动，默认为 <code>bridge</code></li>
+<li><code>--verbose</code> 输出更多调试信息。</li>
+<li><code>-v, --version</code> 打印版本并退出。</li>
+</ul>
+<h3><span id="命令使用说明">命令使用说明</span></h3>
+<h4><span id="build"><code>build</code></span></h4>
+<p>格式为 <code>docker-compose build [options] [SERVICE...]</code>。</p>
+<p>构建（重新构建）项目中的服务容器。</p>
+<p>服务容器一旦构建后，将会带上一个标记名，例如对于 web 项目中的一个 db 容器，可能是 web_db。</p>
+<p>可以随时在项目目录下运行 <code>docker-compose build</code> 来重新构建服务。</p>
+<p>选项包括：</p>
+<ul>
+<li><code>--force-rm</code> 删除构建过程中的临时容器。</li>
+<li><code>--no-cache</code> 构建镜像过程中不使用 cache（这将加长构建过程）。</li>
+<li><code>--pull</code> 始终尝试通过 pull 来获取更新版本的镜像。</li>
+</ul>
+<h4><span id="config"><code>config</code></span></h4>
+<p>验证 Compose 文件格式是否正确，若正确则显示配置，若格式错误显示错误原因。</p>
+<h4><span id="down"><code>down</code></span></h4>
+<p>此命令将会停止 <code>up</code> 命令所启动的容器，并移除网络</p>
+<h4><span id="exec"><code>exec</code></span></h4>
+<p>进入指定的容器。</p>
+<h4><span id="help"><code>help</code></span></h4>
+<p>获得一个命令的帮助。</p>
+<h4><span id="images"><code>images</code></span></h4>
+<p>列出 Compose 文件中包含的镜像。</p>
+<h4><span id="kill"><code>kill</code></span></h4>
+<p>格式为 <code>docker-compose kill [options] [SERVICE...]</code>。</p>
+<p>通过发送 <code>SIGKILL</code> 信号来强制停止服务容器。</p>
+<p>支持通过 <code>-s</code> 参数来指定发送的信号，例如通过如下指令发送 <code>SIGINT</code> 信号。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose kill -s SIGINT</span><br></pre></td></tr></table></figure>
+<h4><span id="logs"><code>logs</code></span></h4>
+<p>格式为 <code>docker-compose logs [options] [SERVICE...]</code>。</p>
+<p>查看服务容器的输出。默认情况下，docker-compose 将对不同的服务输出使用不同的颜色来区分。可以通过 <code>--no-color</code> 来关闭颜色。</p>
+<p>该命令在调试问题的时候十分有用。</p>
+<h4><span id="pause"><code>pause</code></span></h4>
+<p>格式为 <code>docker-compose pause [SERVICE...]</code>。</p>
+<p>暂停一个服务容器。</p>
+<h4><span id="port"><code>port</code></span></h4>
+<p>格式为 <code>docker-compose port [options] SERVICE PRIVATE_PORT</code>。</p>
+<p>打印某个容器端口所映射的公共端口。</p>
+<p>选项：</p>
+<ul>
+<li><code>--protocol=proto</code> 指定端口协议，tcp（默认值）或者 udp。</li>
+<li><code>--index=index</code> 如果同一服务存在多个容器，指定命令对象容器的序号（默认为 1）。</li>
+</ul>
+<h4><span id="ps"><code>ps</code></span></h4>
+<p>格式为 <code>docker-compose ps [options] [SERVICE...]</code>。</p>
+<p>列出项目中目前的所有容器。</p>
+<p>选项：</p>
+<ul>
+<li><code>-q</code> 只打印容器的 ID 信息。</li>
+</ul>
+<h4><span id="pull"><code>pull</code></span></h4>
+<p>格式为 <code>docker-compose pull [options] [SERVICE...]</code>。</p>
+<p>拉取服务依赖的镜像。</p>
+<p>选项：</p>
+<ul>
+<li><code>--ignore-pull-failures</code> 忽略拉取镜像过程中的错误。</li>
+</ul>
+<h4><span id="push"><code>push</code></span></h4>
+<p>推送服务依赖的镜像到 Docker 镜像仓库。</p>
+<h4><span id="restart"><code>restart</code></span></h4>
+<p>格式为 <code>docker-compose restart [options] [SERVICE...]</code>。</p>
+<p>重启项目中的服务。</p>
+<p>选项：</p>
+<ul>
+<li><code>-t, --timeout TIMEOUT</code> 指定重启前停止容器的超时（默认为 10 秒）。</li>
+</ul>
+<h4><span id="rm"><code>rm</code></span></h4>
+<p>格式为 <code>docker-compose rm [options] [SERVICE...]</code>。</p>
+<p>删除所有（停止状态的）服务容器。推荐先执行 <code>docker-compose stop</code> 命令来停止容器。</p>
+<p>选项：</p>
+<ul>
+<li><code>-f, --force</code> 强制直接删除，包括非停止状态的容器。一般尽量不要使用该选项。</li>
+<li><code>-v</code> 删除容器所挂载的数据卷。</li>
+</ul>
+<h4><span id="run"><code>run</code></span></h4>
+<p>格式为 <code>docker-compose run [options] [-p PORT...] [-e KEY=VAL...] SERVICE [COMMAND] [ARGS...]</code>。</p>
+<p>在指定服务上执行一个命令。</p>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose run ubuntu ping docker.com</span><br></pre></td></tr></table></figure>
+<p>将会启动一个 ubuntu 服务容器，并执行 <code>ping docker.com</code> 命令。</p>
+<p>默认情况下，如果存在关联，则所有关联的服务将会自动被启动，除非这些服务已经在运行中。</p>
+<p>该命令类似启动容器后运行指定的命令，相关卷、链接等等都将会按照配置自动创建。</p>
+<p>两个不同点：</p>
+<ul>
+<li>给定命令将会覆盖原有的自动运行命令；</li>
+<li>不会自动创建端口，以避免冲突。</li>
+</ul>
+<p>如果不希望自动启动关联的容器，可以使用 <code>--no-deps</code> 选项，例如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose run --no-deps web python manage.py shell</span><br></pre></td></tr></table></figure>
+<p>将不会启动 web 容器所关联的其它容器。</p>
+<p>选项：</p>
+<ul>
+<li><code>-d</code> 后台运行容器。</li>
+<li><code>--name NAME</code> 为容器指定一个名字。</li>
+<li><code>--entrypoint CMD</code> 覆盖默认的容器启动指令。</li>
+<li><code>-e KEY=VAL</code> 设置环境变量值，可多次使用选项来设置多个环境变量。</li>
+<li><code>-u, --user=&quot;&quot;</code> 指定运行容器的用户名或者 uid。</li>
+<li><code>--no-deps</code> 不自动启动关联的服务容器。</li>
+<li><code>--rm</code> 运行命令后自动删除容器，<code>d</code> 模式下将忽略。</li>
+<li><code>-p, --publish=[]</code> 映射容器端口到本地主机。</li>
+<li><code>--service-ports</code> 配置服务端口并映射到本地主机。</li>
+<li><code>-T</code> 不分配伪 tty，意味着依赖 tty 的指令将无法运行。</li>
+</ul>
+<h4><span id="scale"><code>scale</code></span></h4>
+<p>格式为 <code>docker-compose scale [options] [SERVICE=NUM...]</code>。</p>
+<p>设置指定服务运行的容器个数。</p>
+<p>通过 <code>service=num</code> 的参数来设置数量。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose scale web=3 db=2</span><br></pre></td></tr></table></figure>
+<p>将启动 3 个容器运行 web 服务，2 个容器运行 db 服务。</p>
+<p>一般的，当指定数目多于该服务当前实际运行容器，将新创建并启动容器；反之，将停止容器。</p>
+<p>选项：</p>
+<ul>
+<li><code>-t, --timeout TIMEOUT</code> 停止容器时候的超时（默认为 10 秒）。</li>
+</ul>
+<h4><span id="start"><code>start</code></span></h4>
+<p>格式为 <code>docker-compose start [SERVICE...]</code>。</p>
+<p>启动已经存在的服务容器。</p>
+<h4><span id="stop"><code>stop</code></span></h4>
+<p>格式为 <code>docker-compose stop [options] [SERVICE...]</code>。</p>
+<p>停止已经处于运行状态的容器，但不删除它。通过 <code>docker-compose start</code> 可以再次启动这些容器。</p>
+<p>选项：</p>
+<ul>
+<li><code>-t, --timeout TIMEOUT</code> 停止容器时候的超时（默认为 10 秒）。</li>
+</ul>
+<h4><span id="top"><code>top</code></span></h4>
+<p>查看各个服务容器内运行的进程。</p>
+<h4><span id="unpause"><code>unpause</code></span></h4>
+<p>格式为 <code>docker-compose unpause [SERVICE...]</code>。</p>
+<p>恢复处于暂停状态中的服务。</p>
+<h4><span id="up"><code>up</code></span></h4>
+<p>格式为 <code>docker-compose up [options] [SERVICE...]</code>。</p>
+<p>该命令十分强大，它将尝试自动完成包括构建镜像，（重新）创建服务，启动服务，并关联服务相关容器的一系列操作。</p>
+<p>链接的服务都将会被自动启动，除非已经处于运行状态。</p>
+<p>可以说，大部分时候都可以直接通过该命令来启动一个项目。</p>
+<p>默认情况，<code>docker-compose up</code> 启动的容器都在前台，控制台将会同时打印所有容器的输出信息，可以很方便进行调试。</p>
+<p>当通过 <code>Ctrl-C</code> 停止命令时，所有容器将会停止。</p>
+<p>如果使用 <code>docker-compose up -d</code>，将会在后台启动并运行所有的容器。一般推荐生产环境下使用该选项。</p>
+<p>默认情况，如果服务容器已经存在，<code>docker-compose up</code> 将会尝试停止容器，然后重新创建（保持使用 <code>volumes-from</code> 挂载的卷），以保证新启动的服务匹配 <code>docker-compose.yml</code> 文件的最新内容。如果用户不希望容器被停止并重新创建，可以使用 <code>docker-compose up --no-recreate</code>。这样将只会启动处于停止状态的容器，而忽略已经运行的服务。如果用户只想重新部署某个服务，可以使用 <code>docker-compose up --no-deps -d &lt;SERVICE_NAME&gt;</code> 来重新创建服务并后台停止旧服务，启动新服务，并不会影响到其所依赖的服务。</p>
+<p>选项：</p>
+<ul>
+<li><code>-d</code> 在后台运行服务容器。</li>
+<li><code>--no-color</code> 不使用颜色来区分不同的服务的控制台输出。</li>
+<li><code>--no-deps</code> 不启动服务所链接的容器。</li>
+<li><code>--force-recreate</code> 强制重新创建容器，不能与 <code>--no-recreate</code> 同时使用。</li>
+<li><code>--no-recreate</code> 如果容器已经存在了，则不重新创建，不能与 <code>--force-recreate</code> 同时使用。</li>
+<li><code>--no-build</code> 不自动构建缺失的服务镜像。</li>
+<li><code>-t, --timeout TIMEOUT</code> 停止容器时候的超时（默认为 10 秒）。</li>
+</ul>
+<h4><span id="version"><code>version</code></span></h4>
+<p>格式为 <code>docker-compose version</code>。</p>
+<p>打印版本信息。</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/虚拟化技术/docker/Docker-compose模板文件/" data-toggle="tooltip" data-placement="top" title="docker-compose 模板文件">&larr; 上一页</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/article/Idea/Idea发布项目到Git/" data-toggle="tooltip" data-placement="top" title="Idea发布项目到git 使用">下一页 &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <br>
+                
+                <!-- require APlayer -->
+                
+                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+                    <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/meting@1.2/dist/Meting.min.js"></script>
+    
+                    <div class="aplayer"
+                        data-id="738933413"
+                        data-server="tencent"
+                        data-type="playlist"
+                        data-fixed="true" 
+                        data-autoplay="undefined" >
+                    </div>
+                
+                
+                
+
+                <br>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+                    <!-- disqus 评论框 start -->
+                    <div class="comment">
+                        <div id="lv-container" data-id="city" data-uid="MTAyMC80MDgyMi8xNzM0Nw=="></div>
+                    </div>
+                    <!-- disqus 评论框 end -->
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">特色标签</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Docker" title="Docker">Docker</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+    <!-- 来必力City版公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
+    
+           if (typeof LivereTower === 'function') { return; }
+    
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
+    
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    <!-- 来必力City版 公共JS代码 end -->
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/superzzp">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/superzzp">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/superzzp">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/superzzp">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; zz胖的博客 2020 
+                    <br>
+                    Theme by <a href="http://zzpblog.cn">zzp</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://www.zzpblog.cn">zz胖</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://github.com/zzpsuper/zzpsuper.github.io" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://zzpblog.cn/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '938dd925deefb971d57c9b42ae09c5da';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://zzpblog.cn/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

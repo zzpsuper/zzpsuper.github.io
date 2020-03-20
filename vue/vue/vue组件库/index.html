@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="2xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content>
+    <meta name="keyword" content="博客，技术，java">
+    <meta name="baidu-site-verification" content="2LpjigRhJ6">
+    <link rel="shortcut icon" href="/img/ironman-draw.ico">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Vue组件库 - zz胖的博客 | Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://zzpblog.cn/vue/vue/vue组件库/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('http://ozilwgpje.bkt.clouddn.com/blog/article.jpg?imageslim')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#vue组件库" title="vue组件库">vue组件库</a>
+                            
+                        </div>
+                        <h1>Vue组件库</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by zz胖的博客 on
+                            2018-09-26
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">zz胖的博客-技术永无止境</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">主页</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">关于我</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">文章</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">标签</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>===官方===</p>
+<ul>
+<li><a href="https://github.com/vuejs/vue" target="_blank" rel="noopener">https://github.com/vuejs/vue</a></li>
+</ul>
+<h4><span id="vue-components组件库">vue-components组件库</span></h4>
+<p>—PC端—</p>
+<ul>
+<li><a href="https://github.com/ElemeFE/element" target="_blank" rel="noopener">https://github.com/ElemeFE/element</a> <code>Vue2.0 PC端UI组件库</code></li>
+<li><a href="https://github.com/iview/iview" target="_blank" rel="noopener">https://github.com/iview/iview</a> <code>一套基于 Vue.js 的高质量 UI 组件库</code></li>
+<li><a href="https://github.com/jackbarham/vuejs-style-guide" target="_blank" rel="noopener">https://github.com/jackbarham/vuejs-style-guide</a> <code>Vue UI框架 vibecast UI风格</code></li>
+<li><a href="https://github.com/luojilab/radon-ui" target="_blank" rel="noopener">https://github.com/luojilab/radon-ui</a> <code>一个帮助你快速开发产品的Vue组件库，简洁好用，效率高，让你摆脱各种定制化的烦恼</code></li>
+<li><a href="https://github.com/myronliu347/vue-carbon" target="_blank" rel="noopener">https://github.com/myronliu347/vue-carbon</a> <code>基于vue开发的material design ui库</code></li>
+<li><a href="https://github.com/N3-components/N3-components" target="_blank" rel="noopener">https://github.com/N3-components/N3-components</a> <code>Vue UI组件库</code></li>
+<li><a href="https://github.com/okoala/vue-antd" target="_blank" rel="noopener">https://github.com/okoala/vue-antd</a> <code>Vue版 ant.design UI组件库</code></li>
+<li><a href="https://github.com/posva/vue-mdl" target="_blank" rel="noopener">https://github.com/posva/vue-mdl</a> <code>Material Design Lite 组件库</code></li>
+<li><a href="https://github.com/rafaelpimpa/buefy" target="_blank" rel="noopener">https://github.com/rafaelpimpa/buefy</a> <code>基于 Bulma 的 Vue.js 轻量级 UI 组件库</code></li>
+<li><a href="https://github.com/AT-UI/at-ui" target="_blank" rel="noopener">https://github.com/AT-UI/at-ui</a> <code>at-ui 一款基于 Vue.js 2.0 的前端 UI 组件库，主要用于快速开发 PC 网站产品</code></li>
+<li><a href="https://github.com/vuetifyjs/vuetify" target="_blank" rel="noopener">https://github.com/vuetifyjs/vuetify</a> <code>基于 Material 的 Vue.js 2.0 前端 UI 组件库</code></li>
+<li><a href="https://github.com/myliang/fish-ui" target="_blank" rel="noopener">https://github.com/myliang/fish-ui</a> <code>一个 Vue.js 2.0 的 Web UI 工具库</code></li>
+<li><a href="https://github.com/wmfe/xcui" target="_blank" rel="noopener">https://github.com/wmfe/xcui</a> <code>基于Vue2.0 的桌面端组件库</code></li>
+</ul>
+<p>—移动端—</p>
+<ul>
+<li><a href="https://github.com/airyland/vux" target="_blank" rel="noopener">https://github.com/airyland/vux</a><code>vue 微信UI组件库</code></li>
+<li><a href="https://github.com/mennghao/vue-mui" target="_blank" rel="noopener">https://github.com/mennghao/vue-mui</a><code>Vue UI组件库</code></li>
+<li><a href="https://github.com/wdfe/wdui" target="_blank" rel="noopener">https://github.com/wdfe/wdui</a><code>基于 Vue 2.0 的移动 UI 组件库</code></li>
+<li><a href="https://github.com/youzan/vant" target="_blank" rel="noopener">https://github.com/youzan/vant</a><code>有赞开发的基于 Vue.js 2.0 的 UI 组件库</code></li>
+<li><a href="https://github.com/ydcss/vue-ydui" target="_blank" rel="noopener">https://github.com/ydcss/vue-ydui</a><code>一只基于Vue2.x的移动端&amp;微信UI。</code></li>
+<li><a href="https://www.awesomes.cn/repo/didi/cube-ui" target="_blank" rel="noopener">https://www.awesomes.cn/repo/didi/cube-ui</a><code>滴滴团队开发的一套基于 Vue.js 实现的精致移动端组件库</code></li>
+<li><a href="https://github.com/zdliuccit/ml-ui" target="_blank" rel="noopener">https://github.com/zdliuccit/ml-ui</a><code>一套为开发者、设计师和产品经理准备的基于 Vue 2 的移动端组件库</code></li>
+</ul>
+<h4><span id="vue-form表单">vue-form表单</span></h4>
+<ul>
+<li><a href="https://github.com/lincenying/vue2-ajax-form" target="_blank" rel="noopener">https://github.com/lincenying/vue2-ajax-form</a> <code>Vue2 ajax提交表单组件</code></li>
+<li><a href="https://github.com/monterail/vue-multiselect" target="_blank" rel="noopener">https://github.com/monterail/vue-multiselect</a> <code>Vue 模拟select组件</code></li>
+<li><a href="https://github.com/jinzhe/vue-calendar" target="_blank" rel="noopener">https://github.com/jinzhe/vue-calendar</a> <code>Vue 日期组件</code></li>
+<li><a href="https://github.com/PeakTai/vue-uploader" target="_blank" rel="noopener">https://github.com/PeakTai/vue-uploader</a> <code>Vue 上传组件</code></li>
+<li><a href="https://github.com/xiaokaike/magic-upload-image" target="_blank" rel="noopener">https://github.com/xiaokaike/magic-upload-image</a> <code>多功能图片上传，支持截图黏贴，拖拽，文件上传</code></li>
+<li><a href="https://github.com/james2doyle/vue-ajax-form-component" target="_blank" rel="noopener">https://github.com/james2doyle/vue-ajax-form-component</a> <code>Vue ajax提交表单组件</code></li>
+<li><a href="https://github.com/wszgxa/vue-v" target="_blank" rel="noopener">https://github.com/wszgxa/vue-v</a> <code>Vue 表单验证组件</code></li>
+</ul>
+<h4><span id="vue-handle操作">vue-handle操作</span></h4>
+<ul>
+<li><a href="https://github.com/MeCKodo/vue-tap" target="_blank" rel="noopener">https://github.com/MeCKodo/vue-tap</a><code>Vue的tap手势插件</code></li>
+<li><a href="https://github.com/kokdemo/vue-href" target="_blank" rel="noopener">https://github.com/kokdemo/vue-href</a> <code>Vue的指令插件，可以让你给任何dom加上一个跳转的事件</code></li>
+</ul>
+<h4><span id="vue-image图片">vue-image图片</span></h4>
+<ul>
+<li><a href="https://github.com/waynecz/vue-img-inputer" target="_blank" rel="noopener">https://github.com/waynecz/vue-img-inputer</a> <code>基于 Vue2 的图片输入框，用于图片预览、拖拽、回填，主题可选，高度可定制</code></li>
+<li><a href="https://github.com/hilongjw/vue-lazyload" target="_blank" rel="noopener">https://github.com/hilongjw/vue-lazyload</a> <code>Vue 图片懒加载组件</code></li>
+<li><a href="https://github.com/JALBAA/vue-lazyload-img" target="_blank" rel="noopener">https://github.com/JALBAA/vue-lazyload-img</a> <code>Vue 图片懒加载组件</code></li>
+<li><a href="https://github.com/qusiba/vue-slider" target="_blank" rel="noopener">https://github.com/qusiba/vue-slider</a> <code>Vue 幻灯片组件</code></li>
+<li><a href="https://github.com/coffcer/vue-loading" target="_blank" rel="noopener">https://github.com/coffcer/vue-loading</a> <code>Vue loadding组件</code></li>
+<li><a href="https://github.com/shhdgit/vue-easy-slider" target="_blank" rel="noopener">https://github.com/shhdgit/vue-easy-slider</a> <code>Vue.js 的轮播组件</code></li>
+<li><a href="https://github.com/xLogic92/vue-picture-preview" target="_blank" rel="noopener">https://github.com/xLogic92/vue-picture-preview</a> <code>移动端 Vue.js 图片预览插件</code></li>
+</ul>
+<h4><span id="vue-notice通知">vue-notice通知</span></h4>
+<ul>
+<li><a href="https://github.com/s4l1h/vue-toastr" target="_blank" rel="noopener">https://github.com/s4l1h/vue-toastr</a> <code>Vue Toastr 组件</code></li>
+<li><a href="https://www.npmjs.com/package/vue-toaster-plugin" target="_blank" rel="noopener">https://www.npmjs.com/package/vue-toaster-plugin</a> <code>Vue Toastr 组件</code></li>
+</ul>
+<h4><span id="vue-other其他">vue-other其他</span></h4>
+<ul>
+<li><a href="https://github.com/miaolz123/vue-markdown" target="_blank" rel="noopener">https://github.com/miaolz123/vue-markdown</a> <code>Vue markdown解析器组件</code></li>
+<li><a href="https://github.com/wy-ei/vue-filter" target="_blank" rel="noopener">https://github.com/wy-ei/vue-filter</a> <code>Vue 过滤器组件</code></li>
+<li><a href="https://github.com/BrockReece/vue-faker" target="_blank" rel="noopener">https://github.com/BrockReece/vue-faker</a> <code>Vue 数据伪造器</code></li>
+<li><a href="https://github.com/Twiknight/vue-transition" target="_blank" rel="noopener">https://github.com/Twiknight/vue-transition</a> <code>Vue 处理CSS转换组件和动画</code></li>
+<li><a href="https://github.com/shidianxia/vue-localforage" target="_blank" rel="noopener">https://github.com/shidianxia/vue-localforage</a> <code>Vue 本地存储插件</code></li>
+<li><a href="https://github.com/jaweii/vueg" target="_blank" rel="noopener">https://github.com/jaweii/vueg</a> <code>为 webApp 提供转场特效的开源 Vue 插件</code></li>
+<li><a href="https://github.com/jcc/v-distpicker" target="_blank" rel="noopener">https://github.com/jcc/v-distpicker</a> <code>一个简单易用的地区选择器</code></li>
+<li><a href="https://github.com/adeptoas/sweet-modal-vue" target="_blank" rel="noopener">https://github.com/adeptoas/sweet-modal-vue</a> <code>支持 Vue.js 的漂亮模态框组件</code></li>
+<li><a href="https://fritx.github.io/vue-at" target="_blank" rel="noopener">https://fritx.github.io/vue-at</a> <code>At.js 的 Vue.js 组件，自动完成 @ 功能</code></li>
+<li><a href="https://github.com/epicmaxco/epic-spinners" target="_blank" rel="noopener">https://github.com/epicmaxco/epic-spinners</a> <code>一系列使用方便的 CSS loading 效果集合组件</code></li>
+<li><a href="https://github.com/michalsnik/vue-content-placeholders" target="_blank" rel="noopener">https://github.com/michalsnik/vue-content-placeholders</a> <code>在网页内容加载完成之前渲染占位布局的 Vue 组件</code></li>
+<li><a href="https://github.com/tipsy/bubbly-bg" target="_blank" rel="noopener">https://github.com/tipsy/bubbly-bg</a> <code>小于 1kB 的漂亮的泡状背景库</code></li>
+<li><a href="https://github.com/chenxuan0000/vue-seamless-scroll" target="_blank" rel="noopener">https://github.com/chenxuan0000/vue-seamless-scroll</a> <code>Vue.js 无缝滚动组件</code></li>
+</ul>
+<p>===实例===</p>
+<ul>
+<li><a href="https://github.com/jackhutu/jackblog-vue" target="_blank" rel="noopener">https://github.com/jackhutu/jackblog-vue</a></li>
+<li><a href="https://github.com/lincenying/mmf-blog-vue2" target="_blank" rel="noopener">https://github.com/lincenying/mmf-blog-vue2</a></li>
+<li><a href="https://github.com/lincenying/mmf-blog-vue2-ssr" target="_blank" rel="noopener">https://github.com/lincenying/mmf-blog-vue2-ssr</a></li>
+</ul>
+<p>===资料===</p>
+<ul>
+<li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">https://github.com/vuejs/awesome-vue</a></li>
+</ul>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/虚拟化技术/docker/Docker初探/" data-toggle="tooltip" data-placement="top" title="Docker初探">&larr; 上一页</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/开发工具/vscode/vscode插件/" data-toggle="tooltip" data-placement="top" title="vscode插件集">下一页 &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <br>
+                
+                <!-- require APlayer -->
+                
+                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+                    <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/meting@1.2/dist/Meting.min.js"></script>
+    
+                    <div class="aplayer"
+                        data-id="738933413"
+                        data-server="tencent"
+                        data-type="playlist"
+                        data-fixed="true" 
+                        data-autoplay="undefined" >
+                    </div>
+                
+                
+                
+
+                <br>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+                    <!-- disqus 评论框 start -->
+                    <div class="comment">
+                        <div id="lv-container" data-id="city" data-uid="MTAyMC80MDgyMi8xNzM0Nw=="></div>
+                    </div>
+                    <!-- disqus 评论框 end -->
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">特色标签</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#vue组件库" title="vue组件库">vue组件库</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+    <!-- 来必力City版公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
+    
+           if (typeof LivereTower === 'function') { return; }
+    
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
+    
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    <!-- 来必力City版 公共JS代码 end -->
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/superzzp">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/superzzp">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/superzzp">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/superzzp">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; zz胖的博客 2020 
+                    <br>
+                    Theme by <a href="http://zzpblog.cn">zzp</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://www.zzpblog.cn">zz胖</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://github.com/zzpsuper/zzpsuper.github.io" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://zzpblog.cn/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '938dd925deefb971d57c9b42ae09c5da';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://zzpblog.cn/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
