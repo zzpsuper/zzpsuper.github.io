@@ -140,14 +140,14 @@
 
                         
                         <li>
-                            <a href="/tags/">标签</a>
+                            <a href="/archive/">文章</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">文章</a>
+                            <a href="/tags/">标签</a>
                         </li>
                         
                     
@@ -207,41 +207,6 @@
             
                 <!-- Main Content -->
 
-
-<div class="post-preview">
-
-    <a href="/article/docker/install-docker/">
-        <h2 class="post-title">
-            [Docker] 安装Docker
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            1. CentOS 安装Docker
-
-建议使用centos7
-
-1.1. 安装Docker
-1.1.1. 卸载旧版本
-旧版本的Docker命名为docker或docker-engine，如果有安装旧版本，先卸载旧版本
-12345678910$ sudo yum remove -y docker \                  docker-client \              ......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by zz胖的博客 on
-            2018-06-23
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Docker" title="Docker">Docker</a>
-            
-        </div>
-    
-
-</div>
-<hr>
 
 <div class="post-preview">
 
@@ -414,23 +379,20 @@ Engine执行Docker内部的一系列工作，每一项工作都是......
 
 <div class="post-preview">
 
-    <a href="/article/docker/dockerfile-usage/">
+    <a href="/article/docker/docker-commands-principle/">
         <h2 class="post-title">
-            [Docker] Dockerfile使用说明
+            [Docker] Docker常用命令原理图
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            一、Dockerfile的说明
-dockerfile指令忽略大小写，建议大写，#作为注释，每行只支持一条指令，指令可以带多个参数。
-dockerfile指令分为构建指令和设置指令。
+            1. 基本概念
+1.1. image layer（镜像层）
+镜像可以看成是由多个镜像层叠加起来的一个文件系统，镜像层也可以简单理解为一个基本的镜像，而每个镜像层之间通过指针的形式进行叠加。
 
-构建指令：用于构建image，其指定的操作不会在运行image的容器中执行。
-设置指令：用于设置image的属性，其指定的操作会在运行image的容器中执行。
-
-二、Dockerfile指令说明
-1、FROM（......
+根据上图，镜像层的主要组成部分包括镜像层id，镜像层指针【指向父层】，元数据【layer metadata】包含了docker构建和运行的信息还有父层的层次信息。
+只读层和读写层【top layer】的......
         </div>
     </a>
     
@@ -450,20 +412,23 @@ dockerfile指令分为构建指令和设置指令。
 
 <div class="post-preview">
 
-    <a href="/article/docker/docker-commands-principle/">
+    <a href="/article/docker/dockerfile-usage/">
         <h2 class="post-title">
-            [Docker] Docker常用命令原理图
+            [Docker] Dockerfile使用说明
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            1. 基本概念
-1.1. image layer（镜像层）
-镜像可以看成是由多个镜像层叠加起来的一个文件系统，镜像层也可以简单理解为一个基本的镜像，而每个镜像层之间通过指针的形式进行叠加。
+            一、Dockerfile的说明
+dockerfile指令忽略大小写，建议大写，#作为注释，每行只支持一条指令，指令可以带多个参数。
+dockerfile指令分为构建指令和设置指令。
 
-根据上图，镜像层的主要组成部分包括镜像层id，镜像层指针【指向父层】，元数据【layer metadata】包含了docker构建和运行的信息还有父层的层次信息。
-只读层和读写层【top layer】的......
+构建指令：用于构建image，其指定的操作不会在运行image的容器中执行。
+设置指令：用于设置image的属性，其指定的操作会在运行image的容器中执行。
+
+二、Dockerfile指令说明
+1、FROM（......
         </div>
     </a>
     
@@ -532,9 +497,9 @@ dockerfile指令分为构建指令和设置指令。
             
         
             
-        
-            
             <a href="/tags/#Ubuntu" title="Ubuntu" rel="4">Ubuntu</a>
+            
+        
             
         
             
@@ -553,8 +518,6 @@ dockerfile指令分为构建指令和设置指令。
         
             
             <a href="/tags/#vscode" title="vscode" rel="2">vscode</a>
-            
-        
             
         
             
@@ -638,10 +601,6 @@ dockerfile指令分为构建指令和设置指令。
     <ul>
       
         <li>
-          <a href="/vue/vue/总结vue知识体系之基础入门篇/">总结vue知识体系之基础入门篇</a>
-        </li>
-      
-        <li>
           <a href="/article/node/nodejs-mongoose/">[Node] nodejs-mongoose</a>
         </li>
       
@@ -655,6 +614,10 @@ dockerfile指令分为构建指令和设置指令。
       
         <li>
           <a href="/article/Express/Express简介/">[Node] Express简介 </a>
+        </li>
+      
+        <li>
+          <a href="/article/Express/Express静态服务/">[Node] Express静态服务 </a>
         </li>
       
     </ul>
@@ -675,7 +638,7 @@ dockerfile指令分为构建指令和设置指令。
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">4</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">4</span></li></ul>
     </div>
 
         <hr>
